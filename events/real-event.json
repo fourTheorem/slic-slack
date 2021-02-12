@@ -1,0 +1,20 @@
+{
+  "Records": [
+    {
+      "messageId": "11bcdb4a-dd29-4f05-a0c6-abcdef1234567890",
+      "receiptHandle": "ABC123",
+      "body": "{\n  \"Type\" : \"Notification\",\n  \"MessageId\" : \"55e735e6-aa6f-5387-80b7-6d7b2eb03122\",\n  \"TopicArn\" : \"arn:aws:sns:eu-west-1:1234567890123:SLICWatchAlarms\",\n  \"Subject\" : \"ALARM: \\\"LambdaErrors_slic-watch-HandleFunctionCreateUpdate-2F80XVSYPL7T\\\" in EU (Ireland)\",\n  \"Message\" : \"{\\\"AlarmName\\\":\\\"LambdaErrors_slic-watch-HandleFunctionCreateUpdate-2F80XVSYPL7T\\\",\\\"AlarmDescription\\\":\\\"Alarm for lambda slic-watch-HandleFunctionCreateUpdate-2F80XVSYPL7T errors\\\",\\\"AWSAccountId\\\":\\\"1234567890123\\\",\\\"NewStateValue\\\":\\\"ALARM\\\",\\\"NewStateReason\\\":\\\"Threshold Crossed: 1 datapoint [1.0 (10/02/21 06:51:00)] was greater than the threshold (0.0).\\\",\\\"StateChangeTime\\\":\\\"2021-02-10T06:52:15.001+0000\\\",\\\"Region\\\":\\\"EU (Ireland)\\\",\\\"AlarmArn\\\":\\\"arn:aws:cloudwatch:eu-west-1:1234567890123:alarm:LambdaErrors_slic-watch-HandleFunctionCreateUpdate-2F80XVSYPL7T\\\",\\\"OldStateValue\\\":\\\"INSUFFICIENT_DATA\\\",\\\"Trigger\\\":{\\\"MetricName\\\":\\\"Errors\\\",\\\"Namespace\\\":\\\"AWS/Lambda\\\",\\\"StatisticType\\\":\\\"Statistic\\\",\\\"Statistic\\\":\\\"SUM\\\",\\\"Unit\\\":null,\\\"Dimensions\\\":[{\\\"value\\\":\\\"slic-watch-HandleFunctionCreateUpdate-2F80XVSYPL7T\\\",\\\"name\\\":\\\"FunctionName\\\"}],\\\"Period\\\":60,\\\"EvaluationPeriods\\\":1,\\\"ComparisonOperator\\\":\\\"GreaterThanThreshold\\\",\\\"Threshold\\\":0.0,\\\"TreatMissingData\\\":\\\"\\\",\\\"EvaluateLowSampleCountPercentile\\\":\\\"\\\"}}\",\n  \"Timestamp\" : \"2021-02-10T06:52:15.040Z\",\n  \"SignatureVersion\" : \"1\",\n  \"Signature\" : \"YChJ1fCzpeapDXIBQa/rhIw90TDa8a8XZf4o2T/T9BTjy4MNrZVafb8t4NezGzYnqS8tEYNAFjwhSYnjms4UNpun6D+oG48zJo5ct70oYwo6gWW3sTyl0em7GC28LEuYSYnOnS9bpXNB7Lam2+g52VpOm12XHnkVG8XXuTSEpmdCIkwq0B71GiDoeJGLy6qZ+IYvLe7tV5/qrb0KZYogoZh/FN8VSuqzWnSufl81nL+zyni5eJNGtrVNvHpwOzKx2M6MnvQ+D8iGni9JUag7cqWvpNwg+CKZ8gXNlblCGwfLqR2X/NDRaGWcZ4GzlDBVI8Oxym50TF5POxPC5binAw==\",\n  \"SigningCertURL\" : \"https://sns.eu-west-1.amazonaws.com/SimpleNotificationService-010a507c1833636cd94bdb98bd93083a.pem\",\n  \"UnsubscribeURL\" : \"https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:1234567890123:SLICWatchAlarms:8de685da-a4af-4548-b9d5-73866638c197\"\n}",
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1612939935086",
+        "SenderId": "AIDAGIUSEPPIVERDI",
+        "ApproximateFirstReceiveTimestamp": "1612939935098"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "b8ae2f4822900567dd1e8efb8bf7f31b",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:eu-west-1:1234567890123:slic-slack-slspl-AlarmNotificationProcessorSNSEventQueue",
+      "awsRegion": "eu-west-1"
+    }
+  ]
+}

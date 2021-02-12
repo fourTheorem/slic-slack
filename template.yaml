@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  slic-slack
+
+  SNS CloudWatch Alarm notification forwarding
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: slic-slack
+    Description: SNS CloudWatch Alarm notification forwarding
+    Author: fourTheorem
+    SpdxLicenseId: Apache-2.0
+    LicenseUrl: LICENSE
+    ReadmeUrl: README.md
+    Labels: ['cloudwatch', 'sns', 'slack']
+    HomePageUrl: https://github.com/fourTheorem/slic-slack
+    SemanticVersion: 1.0.0
+    SourceCodeUrl: https://github.com/fourTheorem/slic-slack
+
+Parameters:
+  AlarmsTopicArn:
+    Type: String
+    Description: >
+      The ARN of an SNS Topic to which CloudWatch Alarm notifications are sent
+  SlackWebhookUrl:
+    Type: String
+    Description: >
+      A Slack webhook HTTPS URL
+
+Globals:
+  Function:
+    Environment:
+      Variables:
+        POWERTOOLS_LOGGER_LOG_EVENT: true
+        POWERTOOLS_TRACE_DISABLED: true
+        POWERTOOLS_SERVICE_NAME: slicslack
+        LOG_LEVEL: INFO
+
+Resources:
+  AlarmNotificationProcessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: notifications/
+      Handler: topic_handler.handle_event
+      Runtime: python3.8
+      Timeout: 30
+      Environment:
+        Variables:
+          SLACK_WEBHOOK_URL: !Ref SlackWebhookUrl
+      Events:
+        SNSEvent:
+          Type: SNS
+          Properties:
+            Topic: !Ref AlarmsTopicArn
+            SqsSubscription: True
