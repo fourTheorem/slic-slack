@@ -38,6 +38,11 @@ Globals:
         LOG_LEVEL: INFO
 
 Resources:
+  AlarmImageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "slic-slack-alarm-images-${AWS::AccountId}-${AWS::Region}"
+
   AlarmNotificationProcessor:
     Type: AWS::Serverless::Function
     Properties:
@@ -48,9 +53,23 @@ Resources:
       Environment:
         Variables:
           SLACK_WEBHOOK_URL: !Ref SlackWebhookUrl
+          ALARM_IMAGE_BUCKET_NAME: !Ref AlarmImageBucket
       Events:
         SNSEvent:
           Type: SNS
           Properties:
             Topic: !Ref AlarmsTopicArn
             SqsSubscription: True
+      Policies:
+        - Statement:
+          - Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetObject
+            Resource:
+              - !Sub "arn:aws:s3:::${AlarmImageBucket}/*"
+          - Effect: Allow
+            Action:
+              - cloudwatch:GetMetricWidgetImage
+            Resource:
+              - "*"
