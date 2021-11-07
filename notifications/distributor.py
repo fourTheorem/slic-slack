@@ -5,7 +5,7 @@ import os
 import requests
 from aws_lambda_powertools import Logger
 
-from notifications.cw_alarm import CloudWatchAlarm
+from cw_alarm import CloudWatchAlarm
 
 COLOR_RED = '#a6364f'
 COLOR_GREEN = '#36a64f'
@@ -63,9 +63,15 @@ def forward_alarms(alarms: Iterable[CloudWatchAlarm]):
                     'title': f'{emoji} {alarm.new_state} {alarm.alarm_name}',
                     'title_link': console_url,
                     'text': alarm.reason,
-                    'fields': fields
+                    'fields': fields,
+                    'image_url': alarm.image_url
                 }]
             }
 
             LOG.info('Sending message to Slack', extra={'body': body})
-            requests.post(SLACK_WEBHOOK_URL, json.dumps(body))
+            response = requests.post(SLACK_WEBHOOK_URL, json.dumps(body))
+            LOG.info('Slack response', extra={
+                'text': response.text,
+                'status_code': response.status_code,
+                'headers': response.headers,
+            })

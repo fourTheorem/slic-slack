@@ -244,3 +244,6 @@ $RECYCLE.BIN/
 .aws-sam/
 .idea/
 samconfig.toml
+**/dontcommit*
+*.ipynb
+env.json

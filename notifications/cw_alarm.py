@@ -14,3 +14,4 @@ class CloudWatchAlarm:
     region: str  # e.g., EU (Ireland)
     region_id: str  # e.g., eu-west-1
     trigger: dict
+    image_url: str
