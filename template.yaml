@@ -54,3 +54,10 @@ Resources:
           Properties:
             Topic: !Ref AlarmsTopicArn
             SqsSubscription: True
+
+  AlarmNotificationProcessorLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Retain
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AlarmNotificationProcessor}"
+      RetentionInDays: 14

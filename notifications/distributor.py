@@ -5,7 +5,7 @@ import os
 import requests
 from aws_lambda_powertools import Logger
 
-from notifications.cw_alarm import CloudWatchAlarm
+from cw_alarm import CloudWatchAlarm
 
 COLOR_RED = '#a6364f'
 COLOR_GREEN = '#36a64f'
