@@ -58,20 +58,21 @@ def forward_pipeline_notifications(notifications: Iterable[CodePipelineNotificat
                 'value': notification.timestamp,
                 'short': True,
             }]
-            console_url = f'https://{region}.console.aws.amazon.com/codesuite/codepipeline/pipelines/{notification.pipeline_name}/executions/{notification.execution_id}/visualization?region={region}'
+            if notification.failed_actions is not None:
+                failed_field_value = f'❌ {len(notification.failed_actions)} action(s) failed in stage {notification.failed_stage}\n'
+                for action in notification.failed_actions:
+                    failed_field_value = failed_field_value + f'*{action["action"]}*\n> `{action["additionalInformation"]}`\n'
+                fields.append({'value': failed_field_value})
 
+            console_url = f'https://{region}.console.aws.amazon.com/codesuite/codepipeline/pipelines/{notification.pipeline_name}/executions/{notification.execution_id}/visualization?region={region}'
             emoji = pipeline_state_emojis.get(notification.state)
             color = pipeline_colors.get(notification.state)
-            text = f'Pipeline {notification.pipeline_name} is {notification.state}'
             body = {
-                'text': text,
                 'attachments': [{
                     'mrkdwn_in': ['text'],
                     'color': color,
-                    'pretext': text,
                     'title': f'{emoji} {notification.pipeline_name} is {notification.state}',
                     'title_link': console_url,
-                    'text': 'A CodePipeline execution has changed state',
                     'fields': fields
                 }]
             }
